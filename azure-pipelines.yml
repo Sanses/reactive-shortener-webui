@@ -19,7 +19,7 @@ variables:
   imagePullSecret: 'sansaedemoacrc29e-auth'
 
   # Agent VM image name
-  vmImageName: 'jumphost'
+  vmImageName: 'ubuntu-latest'
   
 
 stages:
