@@ -1,3 +1,0 @@
-{
-  "connectionString": "${APPINSIGHTS_CONNECTION_STRING}"
-}
