@@ -1,3 +1,3 @@
 {
-  "connectionString": "InstrumentationKey=9ab6e4d1-4061-4973-814e-cd5e2e2a39ce;IngestionEndpoint=https://koreacentral-0.in.applicationinsights.azure.com/"
+  "connectionString": "${APPINSIGHTS_CONNECTION_STRING}"
 }
