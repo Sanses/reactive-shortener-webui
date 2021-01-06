@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: sansaedemoaks 
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sansaedemoaks
+  template:
+    metadata:
+      labels:
+        app: sansaedemoaks 
+    spec:
+      containers:
+        - name: sansaedemoaks 
+          image: sansaedemoacr.azurecr.io/sansaedemoaks
+          ports:
+          - containerPort: 8080
