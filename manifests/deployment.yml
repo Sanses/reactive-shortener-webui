@@ -1,19 +1,19 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: sansaedemoaks 
+  name: shorturl-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: sansaedemoaks
+      app: shorturl-app
   template:
     metadata:
       labels:
-        app: sansaedemoaks 
+        app: shorturl-app
     spec:
       containers:
-        - name: sansaedemoaks 
-          image: sansaedemoacr.azurecr.io/sansaedemoaks
+        - name: shorturl-app
+          image: sansaedemoacr.azurecr.io/shorturl-app
           ports:
           - containerPort: 8080

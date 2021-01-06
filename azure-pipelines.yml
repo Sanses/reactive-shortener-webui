@@ -12,7 +12,7 @@ variables:
 
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'ec4e26a0-3ab0-4693-b7a8-22701fc8c3ae'
-  imageRepository: 'sansaedemoaks'
+  imageRepository: 'shorturl-app'
   containerRegistry: 'sansaedemoacr.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
@@ -53,7 +53,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
-    environment: 'sansaedemoaks.application'
+    environment: 'shorturl-app.application'
     strategy:
       runOnce:
         deploy:
