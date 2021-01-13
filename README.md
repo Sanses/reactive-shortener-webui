@@ -13,7 +13,7 @@
 ##04. Setting JVM Environment variable 
 - -javaagent:path/to/applicationinsights-agent-3.0.0.jar
 
-
+##05. How to Docker Build and Run
 - docker build -t shorturl-app:0.9 .
 
 - docker run -d -p 8080:8080 -e JAVA_OPTS='-server -Xmx1g -Xms1g -Dspring.profiles.active=dev' \
