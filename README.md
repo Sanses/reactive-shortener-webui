@@ -4,16 +4,10 @@
 ##01. Pre Condition
 - Create Azure Application Insights
 
-##02. Edit connectionString
-- ApplicationInsights-agent/applicationinsights.json
-  
-##03. Setting Agent
+##02. Setting Agent
 - ApplicationInsights-agent/AI-Agent.xml
 
-##04. Setting JVM Environment variable 
-- -javaagent:path/to/applicationinsights-agent-3.0.0.jar
-
-##05. How to Docker Build and Run
+##03. How to Docker Build and Run
 - docker build -t shorturl-app:0.9 .
 
 - docker run -d -p 8080:8080 -e JAVA_OPTS='-server -Xmx1g -Xms1g -Dspring.profiles.active=dev' \
