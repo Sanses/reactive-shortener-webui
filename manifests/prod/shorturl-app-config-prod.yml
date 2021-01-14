@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shorturl-app-config
+  labels:
+    env: prod
+data:
+  JAVA_OPTS: "-server -Xmx1g -Xms1g -Dspring.profiles.active=prod"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+  labels:
+    env: prod
+data:
+  REDIS_HOST: "cvpdevredis.redis.cache.windows.net"
+  REDIS_PORT: "6380"
+  REDIS_SSL_ENABLE: "true"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-secret
+  labels:
+    env: prod
+type: Opaque
+data:
+  REDIS_PASSWORD: "dTFDT0NoM1VXVE56bExwcmt5OGpmZmNUcFpicGt2NXlZb2k1aklTN1pLQT0K"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: applicationinsights-secret
+  labels:
+    env: prod
+type: Opaque
+data:
+  APPLICATIONINSIGHTS_CONNECTION_STRING: "SW5zdHJ1bWVudGF0aW9uS2V5PTVhMjVhZWIxLTBkZjgtNDhiYi1hOTcxLWQ1NTkzNWZlZTI3ZTtJbmdlc3Rpb25FbmRwb2ludD1odHRwczovL2tvcmVhY2VudHJhbC0wLmluLmFwcGxpY2F0aW9uaW5zaWdodHMuYXp1cmUuY29tLwo="
+

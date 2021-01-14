@@ -4,6 +4,7 @@ import com.sansae.shorturl.model.Link;
 import com.sansae.shorturl.repository.LinkRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -29,7 +30,5 @@ public class LinkService {
         return linkRepository.deleteByKey(key);
     }
 
-    public Flux<Link> findAll() {
-        return linkRepository.findAll();
-    }
+    public Flux<Link> findAll() { return linkRepository.findAll(); }
 }

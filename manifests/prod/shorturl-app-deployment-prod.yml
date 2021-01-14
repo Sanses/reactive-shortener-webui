@@ -1,0 +1,61 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: shorturl-app-deployment
+  labels:
+    env: prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: shorturl-app
+  template:
+    metadata:
+      labels:
+        app: shorturl-app
+        env: prod
+    spec:
+      containers:
+        - name: shorturl-app
+          image: cvpdemoacr.azurecr.io/shorturlapp
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "300m"
+              memory: "1Gi"
+            requests:
+              cpu: "300m"
+              memory: "1Gi"
+          env:
+          - name: JAVA_OPTS
+            valueFrom:
+              configMapKeyRef:
+                name: shorturl-app-config
+                key: JAVA_OPTS
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: redis-config
+                key: REDIS_HOST
+          - name: REDIS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: redis-config
+                key: REDIS_PORT
+          - name: REDIS_SSL_ENABLE
+            valueFrom:
+              configMapKeyRef:
+                name: redis-config
+                key: REDIS_SSL_ENABLE
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: redis-secret
+                key: REDIS_PASSWORD
+          - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+            valueFrom:
+              secretKeyRef:
+                name: applicationinsights-secret
+                key: APPLICATIONINSIGHTS_CONNECTION_STRING
+          ports:
+          - containerPort: 8080
