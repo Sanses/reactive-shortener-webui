@@ -1,6 +1,11 @@
-## 01. Settings Azure Application Insights
-- A. Create Azure Application Insights
-- B. ApplicationInsights-agent/AI-Agent.xml
+## 01. How to Run IntelliJ on LocalPc
+- A. https://github.com/Sanses/springboot-reactive-shorturl-webui.git
+- B. git checkout Kubernetes
+- C. docker run -d -p 6379:6379 --name redis redis redis-server --appendonly yes  --requirepass "redis"
+- D. VMOptions: -server -Xmx1g -Xms1g -Dspring.profiles.active=local
+- E. ENVParmeters: REDIS_HOST=localhost;REDIS_PORT=6379;REDIS_SSL_ENABLE=false;REDIS_PASSWORD=redis
+- F. Execute Application 
+
 
 ## 02. How to Docker Build and Run on LocalPC
 - A. docker build -t shorturl-app:1 .
