@@ -15,16 +15,18 @@ spec:
         app: shorturl-app
         env: local
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: shorturl-app
-          image: sooabia/shorturl-app
+          image: sooabia/shorturl-app:1
           imagePullPolicy: Always
           resources:
             limits:
-              cpu: "300m"
+              cpu: "1"
               memory: "1Gi"
             requests:
-              cpu: "300m"
+              cpu: "1"
               memory: "1Gi"
           env:
           - name: JAVA_OPTS
