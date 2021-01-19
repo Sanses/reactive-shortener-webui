@@ -1,26 +1,30 @@
-##00. REFFENCE
- - https://wiki.iisanse.com/display/PS/03-05.+Spring+Boot+App+with+Application+Insights
+## 01. Settings Azure Application Insights
+- A. Create Azure Application Insights
+- B. ApplicationInsights-agent/AI-Agent.xml
 
-##01. Pre Condition
-- Create Azure Application Insights
+## 02. How to Docker Build and Run on LocalPC
+- A. docker build -t shorturl-app:1 .
 
-##02. Setting Agent
-- ApplicationInsights-agent/AI-Agent.xml
+- B. docker run -d -p 6379:6379 --name redis redis redis-server --appendonly yes  --requirepass "redis"
 
-##03. How to Docker Build and Run on LocalPC
-- docker build -t shorturl-app:1 .
-
-- docker run -d -p 6379:6379 --name redis redis redis-server --appendonly yes  --requirepass "redis"
-
-- docker run -d -p 80:8080 --link redis \
+- C. docker run -d -p 80:8080 --link redis \
 			-e JAVA_OPTS='-server -Xmx1g -Xms1g -Dspring.profiles.active=local' \
 			-e REDIS_HOST=redis \
 			-e REDIS_PORT=6379 \
 			-e REDIS_SSL_ENABLE=false \
 			-e REDIS_PASSWORD=redis \
 			-e APPLICATIONINSIGHTS_CONNECTION_STRING="InstrumentationKey=" \
-			--name shorturl-app sooabia/shorturl-app:1
-
+			--name shorturl-app shorturl-app:1
+			
+## 03. How to Run Kubernetes on LocalPC
+- PreCondition : Kubernetes on DockerDesktop
+- A. docker build -t {YOUR DOCKERHUB ACCOUNT}/shorturl-app:1 .
+- B. docker push {YOUR DOCKERHUB ACCOUNT}/shorturl-app:1
+- C. kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username={Your Dockerhub username} --docker-password={Your DockerHub PaToken} --docker-email={Your DockerHub Email}
+- D. kubectl apply -f manifests/local/shorturl-app-redis-local.yml
+- E. kubectl apply -f manifests/local/shorturl-app-config-local.yml
+- F. kubectl apply -f manifests/local/shorturl-app-deployment-local.yml
+- G. kubectl apply -f manifests/local/shorturl-app-service-local.yml
 
  
 			  
