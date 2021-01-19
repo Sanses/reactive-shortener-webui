@@ -3,9 +3,9 @@ kind: Deployment
 metadata:
   name: shorturl-app-deployment
   labels:
-    env: prod
+    env: stg
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: shorturl-app
@@ -17,45 +17,64 @@ spec:
     spec:
       containers:
         - name: shorturl-app
-          image: cvpdemoacr.azurecr.io/shorturlapp
+          image: cvpdemodevacr.azurecr.io/shorturl-app
           imagePullPolicy: Always
           resources:
             limits:
-              cpu: "300m"
+              cpu: "1"
               memory: "1Gi"
             requests:
-              cpu: "300m"
+              cpu: "1"
               memory: "1Gi"
           env:
-          - name: JAVA_OPTS
-            valueFrom:
-              configMapKeyRef:
-                name: shorturl-app-config
-                key: JAVA_OPTS
-          - name: REDIS_HOST
-            valueFrom:
-              configMapKeyRef:
-                name: redis-config
-                key: REDIS_HOST
-          - name: REDIS_PORT
-            valueFrom:
-              configMapKeyRef:
-                name: redis-config
-                key: REDIS_PORT
-          - name: REDIS_SSL_ENABLE
-            valueFrom:
-              configMapKeyRef:
-                name: redis-config
-                key: REDIS_SSL_ENABLE
-          - name: REDIS_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: redis-secret
-                key: REDIS_PASSWORD
-          - name: APPLICATIONINSIGHTS_CONNECTION_STRING
-            valueFrom:
-              secretKeyRef:
-                name: applicationinsights-secret
-                key: APPLICATIONINSIGHTS_CONNECTION_STRING
+            - name: JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  name: shorturl-app-config
+                  key: JAVA_OPTS
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: shorturl-app-redis-config
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: shorturl-app-redis-config
+                  key: REDIS_PORT
+            - name: REDIS_SSL_ENABLE
+              valueFrom:
+                configMapKeyRef:
+                  name: shorturl-app-redis-config
+                  key: REDIS_SSL_ENABLE
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: shorturl-app-redis-secret
+                  key: REDIS_PASSWORD
+            - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: shorturl-app-applicationinsights-secret
+                  key: APPLICATIONINSIGHTS_CONNECTION_STRING
           ports:
-          - containerPort: 8080
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              port: http
+              path: /actuator/health/readiness
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              port: http
+              path: /actuator/health/liveness
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3

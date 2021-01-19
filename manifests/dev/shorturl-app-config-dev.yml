@@ -10,7 +10,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: redis-config
+  name: shorturl-app-redis-config
   labels:
     env: dev
 data:
@@ -21,7 +21,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: redis-secret
+  name: shorturl-app-redis-secret
   labels:
     env: dev
 type: Opaque
@@ -31,7 +31,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: applicationinsights-secret
+  name: shorturl-app-applicationinsights-secret
   labels:
     env: dev
 type: Opaque

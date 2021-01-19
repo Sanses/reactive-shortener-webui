@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: shorturl-app-deployment
   labels:
-    env: dev
+    env: local
 spec:
   replicas: 1
   selector:
@@ -13,11 +13,11 @@ spec:
     metadata:
       labels:
         app: shorturl-app
-        env: dev
+        env: local
     spec:
       containers:
         - name: shorturl-app
-          image: cvpdemodevacr.azurecr.io/shorturl-app
+          image: sooabia/shorturl-app
           imagePullPolicy: Always
           resources:
             limits:
