@@ -5,7 +5,7 @@ metadata:
   labels:
     env: local
 data:
-  JAVA_OPTS: "-server -Xmx1g -Xms1g -Dspring.profiles.active=local"
+  JAVA_OPTS: "-server -Ddebug -Xmx1g -Xms1g -Dspring.profiles.active=local"
 ---
 apiVersion: v1
 kind: ConfigMap
